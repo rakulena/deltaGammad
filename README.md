@@ -1,4 +1,4 @@
-This repository is used to measure the uncertainty of ΔΓ_d through simultaneous fitting using the Bd → J/ψ K* and Bd → J/ψ Ks0 (signal) decay modes, along with the B+ → J/ψ K⁺ (control) decay mode.
+This repository is used to measure the uncertainty of ΔΓ_d through simultaneous fitting using the Bd2JpsiKstar and Bd2JpsiKshort (signal) decay modes, along with the Bu2JpsiKplus (control) decay mode.
 
 ## Struction 
 
@@ -13,4 +13,4 @@ This repository is used to measure the uncertainty of ΔΓ_d through simultaneou
 - 'source /cvmfs/sft.cern.ch/lcg/releases/LCG_102b/ROOT/6.26.08/x86_64-centos9-gcc11-opt/ROOT-env.sh'
 
 - 'lb-conda default/2024-07-10'
-  for gbweight and XGBoost'— required for GB Reweighting and XGBoost (not needed if packages are already installed)
+  only for gbweight and XGBoost'— required for GB Reweighting and XGBoost (not needed if packages are already installed)
