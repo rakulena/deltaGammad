@@ -1,5 +1,11 @@
+## Intruoduction
+
 This project performs preselection on Bd2Jpsikstar and Bd2Jpsikstar samples to reduce background events. The process is divided into two parts:
 kst_reduce and ks_reduce
+
+## Enviroment 
+
+'source /cvmfs/sft.cern.ch/lcg/releases/LCG_102b/ROOT/6.26.08/x86_64-centos9-gcc11-opt/ROOT-env.sh'
 
 ## Step
 - 1.Modify data_xxxx and mc_xxxx:
