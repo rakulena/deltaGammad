@@ -8,7 +8,7 @@ This program is used to fit the time acceptance and perform a decay-time fit to 
   
 - dgdfit: fit the decay-time to extract the deltagammad
 
-- inc,src: the file required for fit 
+- inc,src: the folders required for fit 
   
 ## Enviorment
 
