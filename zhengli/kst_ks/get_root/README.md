@@ -3,7 +3,9 @@ kst_reduce and ks_reduce
 
 ## Step
 - 1.Modify data_xxxx and mc_xxxx:
+  
    i. Line 1: /Path/filename.root/TTree
+  
    ii. Line 2: /Path/filename.root
 
 - 2.Modify reduce.cpp:
