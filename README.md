@@ -1,8 +1,8 @@
-## Intruoduction
+# Intruoduction
 
 This repository is used to measure the uncertainty of deltaGammad through simultaneous fitting using the Bd2JpsiKstar and Bd2JpsiKshort (signal) decay modes, along with the Bu2JpsiKplus (control) decay mode.
 
-## Struction 
+## Structure
 
 - kst_ks: Suppresses background events. Includes preselection, sWeight calculation via mass fit, MC kinematic correction using GB Reweighting, MVA with XGBoost, optimal BDT cut selection based on figure of merit, and final application of the BDT cut.
 
