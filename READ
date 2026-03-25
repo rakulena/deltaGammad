@@ -1,2 +1,0 @@
-kst_ks for suppress bkg for tuples which contain preselecions, massfit to calculate sWeights, MC correction by GB Reweighting, MVA by XGBoost and find optimal BDT cut through F.O.M, then apply BDT cut.
-
