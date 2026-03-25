@@ -185,16 +185,16 @@ int main() {
     cout << "------------------------------------------" << endl;
     
     map<string, pair<string, string> > accD16_kst = readAccDParameters(
-        "/lzufs/user/zhanghy/dgd/timeAcc/jpsikst/parinfor/parinfor_base_2016.dat", "16");
-    updateAccMParameters(targetLines, accD16_kst, "accM_kst", "16");
+        "/lzufs/user/zhanghy/kplus/timeAcc/jpsikst/parinfor/parinfor_base_2016.dat", "16");
+    updateAccMParameters(targetLines, accD16_kst, "accD_kst", "16");
     
     map<string, pair<string, string> > accD17_kst = readAccDParameters(
-        "/lzufs/user/zhanghy/dgd/timeAcc/jpsikst/parinfor/parinfor_base_2017.dat", "17");
-    updateAccMParameters(targetLines, accD17_kst, "accM_kst", "17");
+        "/lzufs/user/zhanghy/kplus/timeAcc/jpsikst/parinfor/parinfor_base_2017.dat", "17");
+    updateAccMParameters(targetLines, accD17_kst, "accD_kst", "17");
 
     map<string, pair<string, string> > accD18_kst = readAccDParameters(
-        "/lzufs/user/zhanghy/dgd/timeAcc/jpsikst/parinfor/parinfor_base_2018.dat", "18");
-    updateAccMParameters(targetLines, accD18_kst, "accM_kst", "18");
+        "/lzufs/user/zhanghy/kplus/timeAcc/jpsikst/parinfor/parinfor_base_2018.dat", "18");
+    updateAccMParameters(targetLines, accD18_kst, "accD_kst", "18");
     
     cout << "==========================================" << endl;
     
@@ -202,16 +202,16 @@ int main() {
     cout << "------------------------------------------" << endl;
     
     map<string, pair<string, string> > accD16_ks = readAccDParameters(
-        "/lzufs/user/zhanghy/dgd/timeAcc/jpsiks/parinfor/parinfor_base_2016.dat", "16");
-    updateAccMParameters(targetLines, accD16_ks, "accM_ks", "16");
+        "/lzufs/user/zhanghy/kplus/timeAcc/jpsiks/parinfor/parinfor_base_2016.dat", "16");
+    updateAccMParameters(targetLines, accD16_ks, "accD_ks", "16");
     
     map<string, pair<string, string> > accD17_ks = readAccDParameters(
-        "/lzufs/user/zhanghy/dgd/timeAcc/jpsiks/parinfor/parinfor_base_2017.dat", "17");
-    updateAccMParameters(targetLines, accD17_ks, "accM_ks", "17");
+        "/lzufs/user/zhanghy/kplus/timeAcc/jpsiks/parinfor/parinfor_base_2017.dat", "17");
+    updateAccMParameters(targetLines, accD17_ks, "accD_ks", "17");
 
     map<string, pair<string, string> > accD18_ks = readAccDParameters(
-        "/lzufs/user/zhanghy/dgd/timeAcc/jpsiks/parinfor/parinfor_base_2018.dat", "18");
-    updateAccMParameters(targetLines, accD18_ks, "accM_ks", "18");
+        "/lzufs/user/zhanghy/kplus/timeAcc/jpsiks/parinfor/parinfor_base_2018.dat", "18");
+    updateAccMParameters(targetLines, accD18_ks, "accD_ks", "18");
     
     cout << "==========================================" << endl;
     
