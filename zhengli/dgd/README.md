@@ -1,4 +1,4 @@
-This repository is used to fit the time acceptance and perform a decay-time fit to measure deltagammad with Bd->JpsiKshort and Bd->JpsiKstar
+This folder is used to fit the time acceptance and perform a decay-time fit to measure deltagammad with Bd->JpsiKshort and Bd->JpsiKstar
 
 ## Set the Enviorment
 source /cvmfs/sft.cern.ch/lcg/releases/LCG_102b/ROOT/6.26.08/x86_64-centos9-gcc11-opt/ROOT-env.sh
