@@ -2,11 +2,14 @@
 
 This folder is used to fit the time acceptance and perform a decay-time fit to measure deltagammad with Bd2JpsiKshort and Bd2JpsiKstar
 
-## Struction 
+## Structure
+
 - timeAcc: fit time acceptance by signal and control samples
+  
 - dgdfit: fit the decay-time to extract the deltagammad
   
 ## Enviorment
+
    'source /cvmfs/sft.cern.ch/lcg/releases/LCG_102b/ROOT/6.26.08/x86_64-centos9-gcc11-opt/ROOT-env.sh'
 
 
