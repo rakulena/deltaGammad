@@ -1,4 +1,4 @@
-This repository is used to measure the uncertainty of ΔΓ_d through simultaneous fitting using the Bd2JpsiKstar and Bd2JpsiKshort (signal) decay modes, along with the Bu2JpsiKplus (control) decay mode.
+This repository is used to measure the uncertainty of deltaGammad through simultaneous fitting using the Bd2JpsiKstar and Bd2JpsiKshort (signal) decay modes, along with the Bu2JpsiKplus (control) decay mode.
 
 ## Struction 
 
