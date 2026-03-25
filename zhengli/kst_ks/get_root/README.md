@@ -9,11 +9,14 @@ kst_reduce and ks_reduce
    ii. Line 2: /Path/filename.root
 
 - 2.Modify reduce.cpp:
-Add or delete branches and cut as needed.
+  
+   Add or delete branches and cut as needed.
 
 - 3.Make headfile reduce.h:
-Example:
-/path/makeHeadfile/MakeHeadfile -f filelist/mc_2016 -n reduce .
+  
+  Example:
+  
+  /path/makeHeadfile/MakeHeadfile -f filelist/mc_2016 -n reduce .
 
 If data and MC branches differ, manually adjust the generated headfile to match your data structure.
 
