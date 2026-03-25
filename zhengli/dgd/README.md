@@ -31,8 +31,8 @@ This folder is used to fit the time acceptance and perform a decay-time fit to m
 
     path:./dgd/dgdfit/fitTimeAcc.cpp
 
-    1.line 181-182:Set the paths of Bd->JpsiKshort and Bd->JpsiKstar
-    2.line 189-198：Shared parameters
+    1. line 181-182:Set the paths of Bd->JpsiKshort and Bd->JpsiKstar
+    2. line 189-198：Shared parameters
            
 ## Command
     'make clean'
