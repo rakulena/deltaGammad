@@ -158,28 +158,28 @@ int main(int argc, char **argv)
    char bmass[] = "Bd_ConstJpsi_M";
    char time[] = "Bd_ConstJpsi_tau";
    char timeerr[] = "Bd_ConstJpsi_tauErr";
-   char wgt_sigM_kst[] = "sig_sw";
-   char wgt_sigM_ks[] = "sig_sw";
+   char wgt_sigD_kst[] = "sig_sw";
+   char wgt_sigD_ks[] = "sig_sw";
    double t_l = knots[0];
    double t_h = 14;
 
    string cut1 = Form("%s>%.2lf&&%s<%.2lf", time, t_l, time, t_h);
-   string cut_sigM_kst = Form("%s", cut1.c_str());
-   string cut_sigM_ks = Form("%s", cut1.c_str());
+   string cut_sigD_kst = Form("%s", cut1.c_str());
+   string cut_sigD_ks = Form("%s", cut1.c_str());
 
    if (Vali) {
-        cut_sigM_kst = Form("%s&&abs(%s)<100", cut1.c_str(), wgt_sigM_kst);
-        cut_sigM_ks = Form("%s&&abs(%s)<100", cut1.c_str(), wgt_sigM_ks);
+        cut_sigD_kst = Form("%s&&abs(%s)<100", cut1.c_str(), wgt_sigD_kst);
+        cut_sigD_ks = Form("%s&&abs(%s)<100", cut1.c_str(), wgt_sigD_ks);
    }
 
    cout << "=======================================================" << endl;
-   cout << " cut_sigM_kst: " << cut_sigM_kst << endl;
-   cout << " cut_sigM_ks: " << cut_sigM_ks << endl;
+   cout << " cut_sigD_kst: " << cut_sigD_kst << endl;
+   cout << " cut_sigD_ks: " << cut_sigD_ks << endl;
    cout << "=======================================================" << endl;
 
    // Path templates
-   string path_sigM_kst_template = "/lzufs/user/zhanghy/Sample/afterBDT/after_Bd2JpsiKstar_data_%s_sw_base.root/DecayTree";
-   string path_sigM_ks_template = "/lzufs/user/zhanghy/Sample/afterBDT/after_Bd2JpsiKshort_data_%s_sw_base.root/DecayTree";
+   string path_sigD_kst_template = "/lzufs/user/zhanghy/Sample/afterBDT/after_Bd2JpsiKstar_data_%s_sw_base.root/DecayTree";
+   string path_sigD_ks_template = "/lzufs/user/zhanghy/Sample/afterBDT/after_Bd2JpsiKshort_data_%s_sw_base.root/DecayTree";
 
    // Set observables
    RooRealVar *t = new RooRealVar(time, "time [ps]", t_l, t_h);
@@ -198,30 +198,30 @@ int main(int argc, char **argv)
    RooFormulaVar tau_ks("tau_ks", "(@0 /(1-@2*@2)) * ((1+2*@1*@2+@2*@2)/(1+@1*@2))",RooArgList(tau, cos2beta, y_d));
   
    // Arrays for each year
-   TChain* chain_sigM_kst[ny];
-   TChain* chain_sigM_ks[ny];
-   TTree* tree_sigM_kst[ny];
-   TTree* tree_sigM_ks[ny];
-   RooRealVar* w_sigM_kst[ny];
-   RooRealVar* w_sigM_ks[ny];
-   RooDataSet* data_sigM_kst[ny];
-   RooDataSet* data_sigM_ks[ny];
+   TChain* chain_sigD_kst[ny];
+   TChain* chain_sigD_ks[ny];
+   TTree* tree_sigD_kst[ny];
+   TTree* tree_sigD_ks[ny];
+   RooRealVar* w_sigD_kst[ny];
+   RooRealVar* w_sigD_ks[ny];
+   RooDataSet* data_sigD_kst[ny];
+   RooDataSet* data_sigD_ks[ny];
    RooRealVar* fnll_kst[ny];
    RooRealVar* fnll_ks[ny];
      // Set resolution function
      //jpsikst from bd2jpsipipi
-     RooRealVar *res_muM = new RooRealVar("res_muM_kst", "mean value", 0, -0.1, 0.1, "ps");
-     RooRealVar *sM0 = new RooRealVar("sM0_kst", "", 5.7001e-03, 0, 0.1);
-     RooRealVar *sM1 = new RooRealVar("sM1_kst", "", 6.5188e-01, -20, 20);
-     RooRealVar *sM2 = new RooRealVar("sM2_kst", "", 3.9518e+00, -20, 20); 
+     RooRealVar *res_muD = new RooRealVar("res_muD_kst", "mean value", 0, -0.1, 0.1, "ps");
+     RooRealVar *sD0 = new RooRealVar("sD0_kst", "", 0.00985331);
+     RooRealVar *sD1 = new RooRealVar("sD1_kst", "", 0.494388);
+     RooRealVar *sD2 = new RooRealVar("sD2_kst", "", 9.07483); 
 
-     RooFormulaVar *wd1M = new RooFormulaVar("wd1M_kst", "abs(@1+@2*@0+@3*@0*@0)", RooArgSet(*et, *sM0, *sM1, *sM2));
-     RooGaussModel *resM_kst = new RooGaussModel("resM_kst", "", *t, *res_muM, *wd1M);
+     RooFormulaVar *wd1D = new RooFormulaVar("wd1D_kst", "abs(@1+@2*@0+@3*@0*@0)",RooArgSet(*et, *sD0, *sD1, *sD2));
+     RooGaussModel *resD_kst = new RooGaussModel("resD_kst", "", *t, *res_muD, *wd1D);
 
-     res_muM->setConstant(true); 
-     sM0->setConstant(true); 
-     sM1->setConstant(true); 
-     sM2->setConstant(true);
+     res_muD->setConstant(true); 
+     sD0->setConstant(true); 
+     sD1->setConstant(true); 
+     sD2->setConstant(true);
 
      //jpsiks from sin2beta
      RooRealVar *b_M1 = new RooRealVar("b_M1", "", 0.041, -0.1, 0.2, "ps"); 
@@ -234,9 +234,9 @@ int main(int argc, char **argv)
      RooFormulaVar *sigma_g1 = new RooFormulaVar("sigma_g1", "abs(@0*@1 + @2)", RooArgList(*c_M1, *et, *b_M1));
      RooFormulaVar *sigma_g2 = new RooFormulaVar("sigma_g2", "abs(@0*@1 + @2)", RooArgList(*c_M2, *et, *b_M2));
      RooFormulaVar *sigma_g3 = new RooFormulaVar("sigma_g3", "abs(@0*@1 + @2)", RooArgList(*c_M3, *et, *b_M3));
-     RooGaussModel *gauss1 = new RooGaussModel("gauss1", "", *t, *res_muM, *sigma_g1);
-     RooGaussModel *gauss2 = new RooGaussModel("gauss2", "", *t, *res_muM, *sigma_g2);
-     RooGaussModel *gauss3 = new RooGaussModel("gauss3", "", *t, *res_muM, *sigma_g3);
+     RooGaussModel *gauss1 = new RooGaussModel("gauss1", "", *t, *res_muD, *sigma_g1);
+     RooGaussModel *gauss2 = new RooGaussModel("gauss2", "", *t, *res_muD, *sigma_g2);
+     RooGaussModel *gauss3 = new RooGaussModel("gauss3", "", *t, *res_muD, *sigma_g3);
      RooRealVar *f_M1 = new RooRealVar("f_M1", "", 0.00240, 0.0, 0.01);
      RooRealVar *f_M2 = new RooRealVar("f_M2", "", 0.082, 0.0, 0.2);
      b_M1->setConstant(true);
@@ -247,116 +247,116 @@ int main(int argc, char **argv)
      c_M3->setConstant(true);
      f_M1->setConstant(true); 
      f_M2->setConstant(true);  
-     RooAddModel *resM_ks = new RooAddModel("resM_ks", "3 Gaussian",RooArgList(*gauss1, *gauss2, *gauss3),RooArgList(*f_M1, *f_M2));
+     RooAddModel *resD_ks = new RooAddModel("resD_ks", "3 Gaussian",RooArgList(*gauss1, *gauss2, *gauss3),RooArgList(*f_M1, *f_M2));
 
 
    // Acceptance models for each year
-   RooRealVar* accM_kst[ny][nCof];
-   RooRealVar* accM_ks[ny][nCof];
-   RooArgSet* coefList_sigM_kst[ny];
-   RooArgSet* coefList_sigM_ks[ny];
-   RooAbsReal* ACC_sigM_kst[ny];
-   RooAbsReal* ACC_sigM_ks[ny];
-   RooBinnedPdf* tacc_sigM_kst[ny];
-   RooBinnedPdf* tacc_sigM_ks[ny];
-   RooEffResModel* resacc_sigM_kst[ny];
-   RooEffResModel* resacc_sigM_ks[ny];
+   RooRealVar* accD_kst[ny][nCof];
+   RooRealVar* accD_ks[ny][nCof];
+   RooArgSet* coefList_sigD_kst[ny];
+   RooArgSet* coefList_sigD_ks[ny];
+   RooAbsReal* ACC_sigD_kst[ny];
+   RooAbsReal* ACC_sigD_ks[ny];
+   RooBinnedPdf* tacc_sigD_kst[ny];
+   RooBinnedPdf* tacc_sigD_ks[ny];
+   RooEffResModel* resacc_sigD_kst[ny];
+   RooEffResModel* resacc_sigD_ks[ny];
 
    // PDFs for each year
-   RooBDecay* fitpdf_sigM_kst[ny];
-   RooBDecay* fitpdf_sigM_ks[ny];
+   RooBDecay* fitpdf_sigD_kst[ny];
+   RooBDecay* fitpdf_sigD_ks[ny];
 
    // Initialize arrays
    for (int i = 0; i < ny; i++) {
         string year_str = to_string(years[i]);
         
         // Read trees
-        chain_sigM_kst[i] = new TChain();
-        chain_sigM_ks[i] = new TChain();
+        chain_sigD_kst[i] = new TChain();
+        chain_sigD_ks[i] = new TChain();
         
-        string path_kst = Form(path_sigM_kst_template.c_str(), year_str.c_str());
-        string path_ks = Form(path_sigM_ks_template.c_str(), year_str.c_str());
+        string path_kst = Form(path_sigD_kst_template.c_str(), year_str.c_str());
+        string path_ks = Form(path_sigD_ks_template.c_str(), year_str.c_str());
         
-        chain_sigM_kst[i]->Add(path_kst.c_str());
-        chain_sigM_ks[i]->Add(path_ks.c_str());
+        chain_sigD_kst[i]->Add(path_kst.c_str());
+        chain_sigD_ks[i]->Add(path_ks.c_str());
 
-        chain_sigM_kst[i]->SetBranchStatus("*", 0);
-        chain_sigM_kst[i]->SetBranchStatus(bmass, 1);
-        chain_sigM_kst[i]->SetBranchStatus(time, 1);
-        chain_sigM_kst[i]->SetBranchStatus(timeerr, 1);
-        chain_sigM_kst[i]->SetBranchStatus(wgt_sigM_kst, 1);
+        chain_sigD_kst[i]->SetBranchStatus("*", 0);
+        chain_sigD_kst[i]->SetBranchStatus(bmass, 1);
+        chain_sigD_kst[i]->SetBranchStatus(time, 1);
+        chain_sigD_kst[i]->SetBranchStatus(timeerr, 1);
+        chain_sigD_kst[i]->SetBranchStatus(wgt_sigD_kst, 1);
 
-        chain_sigM_ks[i]->SetBranchStatus("*", 0);
-        chain_sigM_ks[i]->SetBranchStatus(bmass, 1);
-        chain_sigM_ks[i]->SetBranchStatus(time, 1);
-        chain_sigM_ks[i]->SetBranchStatus(timeerr, 1);
-        chain_sigM_ks[i]->SetBranchStatus(wgt_sigM_ks, 1);
+        chain_sigD_ks[i]->SetBranchStatus("*", 0);
+        chain_sigD_ks[i]->SetBranchStatus(bmass, 1);
+        chain_sigD_ks[i]->SetBranchStatus(time, 1);
+        chain_sigD_ks[i]->SetBranchStatus(timeerr, 1);
+        chain_sigD_ks[i]->SetBranchStatus(wgt_sigD_ks, 1);
 
         if (nfrac != 1) {
-            tree_sigM_kst[i] = chain_sigM_kst[i]->CopyTree(cut_sigM_kst.c_str(), "", ceil(chain_sigM_kst[i]->GetEntries() * nfrac), 0);
-            tree_sigM_ks[i] = chain_sigM_ks[i]->CopyTree(cut_sigM_ks.c_str(), "", ceil(chain_sigM_ks[i]->GetEntries() * nfrac), 0);
+            tree_sigD_kst[i] = chain_sigD_kst[i]->CopyTree(cut_sigD_kst.c_str(), "", ceil(chain_sigD_kst[i]->GetEntries() * nfrac), 0);
+            tree_sigD_ks[i] = chain_sigD_ks[i]->CopyTree(cut_sigD_ks.c_str(), "", ceil(chain_sigD_ks[i]->GetEntries() * nfrac), 0);
         } else {
-            tree_sigM_kst[i] = chain_sigM_kst[i]->CopyTree(cut_sigM_kst.c_str());
-            tree_sigM_ks[i] = chain_sigM_ks[i]->CopyTree(cut_sigM_ks.c_str());
+            tree_sigD_kst[i] = chain_sigD_kst[i]->CopyTree(cut_sigD_kst.c_str());
+            tree_sigD_ks[i] = chain_sigD_ks[i]->CopyTree(cut_sigD_ks.c_str());
         }
 
         // Set weights
-        w_sigM_kst[i] = new RooRealVar(wgt_sigM_kst, "", tree_sigM_kst[i]->GetMinimum(wgt_sigM_kst), tree_sigM_kst[i]->GetMaximum(wgt_sigM_kst));
-        w_sigM_ks[i] = new RooRealVar(wgt_sigM_ks, "", tree_sigM_ks[i]->GetMinimum(wgt_sigM_ks), tree_sigM_ks[i]->GetMaximum(wgt_sigM_ks));
+        w_sigD_kst[i] = new RooRealVar(wgt_sigD_kst, "", tree_sigD_kst[i]->GetMinimum(wgt_sigD_kst), tree_sigD_kst[i]->GetMaximum(wgt_sigD_kst));
+        w_sigD_ks[i] = new RooRealVar(wgt_sigD_ks, "", tree_sigD_ks[i]->GetMinimum(wgt_sigD_ks), tree_sigD_ks[i]->GetMaximum(wgt_sigD_ks));
 
         // Set datasets
-        data_sigM_kst[i] = new RooDataSet(Form("data_sigM_kst_%s", parfix[i].c_str()), "", tree_sigM_kst[i], RooArgSet(*t, *et, *w_sigM_kst[i]), 0, wgt_sigM_kst);
-        data_sigM_ks[i] = new RooDataSet(Form("data_sigM_ks_%s", parfix[i].c_str()), "", tree_sigM_ks[i], RooArgSet(*t, *et, *w_sigM_ks[i]), 0, wgt_sigM_ks);
+        data_sigD_kst[i] = new RooDataSet(Form("data_sigD_kst_%s", parfix[i].c_str()), "", tree_sigD_kst[i], RooArgSet(*t, *et, *w_sigD_kst[i]), 0, wgt_sigD_kst);
+        data_sigD_ks[i] = new RooDataSet(Form("data_sigD_ks_%s", parfix[i].c_str()), "", tree_sigD_ks[i], RooArgSet(*t, *et, *w_sigD_ks[i]), 0, wgt_sigD_ks);
 
         // Calculate NLL factors using the existing function from header
-        fnll_kst[i] = new RooRealVar(Form("fnll_kst_%s", parfix[i].c_str()), "", Calfnll(tree_sigM_kst[i], wgt_sigM_kst));
-        fnll_ks[i] = new RooRealVar(Form("fnll_ks_%s", parfix[i].c_str()), "", Calfnll(tree_sigM_ks[i], wgt_sigM_ks));
+        fnll_kst[i] = new RooRealVar(Form("fnll_kst_%s", parfix[i].c_str()), "", Calfnll(tree_sigD_kst[i], wgt_sigD_kst));
+        fnll_ks[i] = new RooRealVar(Form("fnll_ks_%s", parfix[i].c_str()), "", Calfnll(tree_sigD_ks[i], wgt_sigD_ks));
         fnll_kst[i]->setConstant(1);
         fnll_ks[i]->setConstant(1);
 
         cout << "---------------------------------------------------" << endl;
         cout << " Year " << years[i] << " Sig mc (K*) " << endl;
-        data_sigM_kst[i]->Print();
+        data_sigD_kst[i]->Print();
         cout << " Year " << years[i] << " Sig mc (Ks) " << endl;
-        data_sigM_ks[i]->Print();
+        data_sigD_ks[i]->Print();
         cout << "---------------------------------------------------" << endl;
 
 
         // Set acc functions
-        coefList_sigM_kst[i] = new RooArgSet();
-        coefList_sigM_ks[i] = new RooArgSet();
+        coefList_sigD_kst[i] = new RooArgSet();
+        coefList_sigD_ks[i] = new RooArgSet();
 
         for (int j = 0; j < nCof; j++) {
-            accM_kst[i][j] = new RooRealVar(Form("accM_kst%s_%i", parfix[i].c_str(), j), "", 1., 0, 10);
-            accM_ks[i][j] = new RooRealVar(Form("accM_ks%s_%i", parfix[i].c_str(), j), "", 1., 0, 10);
-            coefList_sigM_kst[i]->add(*accM_kst[i][j]);
-            coefList_sigM_ks[i]->add(*accM_ks[i][j]);
+            accD_kst[i][j] = new RooRealVar(Form("accD_kst%s_%i", parfix[i].c_str(), j), "", 1., 0, 10);
+            accD_ks[i][j] = new RooRealVar(Form("accD_ks%s_%i", parfix[i].c_str(), j), "", 1., 0, 10);
+            coefList_sigD_kst[i]->add(*accD_kst[i][j]);
+            coefList_sigD_ks[i]->add(*accD_ks[i][j]);
         }
 
-        ACC_sigM_kst[i] = new RooCubicSplineFun(Form("ACC_sigM_kst_%s", parfix[i].c_str()), "spline", *t, knots, *coefList_sigM_kst[i]);
-        ACC_sigM_ks[i] = new RooCubicSplineFun(Form("ACC_sigM_ks_%s", parfix[i].c_str()), "spline", *t, knots, *coefList_sigM_ks[i]);
+        ACC_sigD_kst[i] = new RooCubicSplineFun(Form("ACC_sigD_kst_%s", parfix[i].c_str()), "spline", *t, knots, *coefList_sigD_kst[i]);
+        ACC_sigD_ks[i] = new RooCubicSplineFun(Form("ACC_sigD_ks_%s", parfix[i].c_str()), "spline", *t, knots, *coefList_sigD_ks[i]);
 
         // Set binned acc
         int nAccBins = (t->getMax() - t->getMin()) / 0.01;
         RooUniformBinning acceptanceBinning(t->getMin(), t->getMax(), nAccBins, "acceptanceBinning");
         t->setBinning(acceptanceBinning, "acceptanceBinning");
 
-        tacc_sigM_kst[i] = new RooBinnedPdf(Form("tacc_sigM_kst_%s", parfix[i].c_str()), "", *t, "acceptanceBinning", *ACC_sigM_kst[i]);
-        tacc_sigM_ks[i] = new RooBinnedPdf(Form("tacc_sigM_ks_%s", parfix[i].c_str()), "", *t, "acceptanceBinning", *ACC_sigM_ks[i]);
+        tacc_sigD_kst[i] = new RooBinnedPdf(Form("tacc_sigD_kst_%s", parfix[i].c_str()), "", *t, "acceptanceBinning", *ACC_sigD_kst[i]);
+        tacc_sigD_ks[i] = new RooBinnedPdf(Form("tacc_sigD_ks_%s", parfix[i].c_str()), "", *t, "acceptanceBinning", *ACC_sigD_ks[i]);
 
-        tacc_sigM_kst[i]->setForceUnitIntegral(true);
-        tacc_sigM_ks[i]->setForceUnitIntegral(true);
+        tacc_sigD_kst[i]->setForceUnitIntegral(true);
+        tacc_sigD_ks[i]->setForceUnitIntegral(true);
 
-        resacc_sigM_kst[i] = new RooEffResModel(Form("resacc_sigM_kst_%s", parfix[i].c_str()), "", *resM_kst, *tacc_sigM_kst[i]);
-        resacc_sigM_ks[i] = new RooEffResModel(Form("resacc_sigM_ks_%s", parfix[i].c_str()), "", *resM_ks, *tacc_sigM_ks[i]);
+        resacc_sigD_kst[i] = new RooEffResModel(Form("resacc_sigD_kst_%s", parfix[i].c_str()), "", *resD_kst, *tacc_sigD_kst[i]);
+        resacc_sigD_ks[i] = new RooEffResModel(Form("resacc_sigD_ks_%s", parfix[i].c_str()), "", *resD_ks, *tacc_sigD_ks[i]);
 
         et->setBins(50, "cache");
-        resacc_sigM_kst[i]->setParameterizeIntegral(RooArgSet(*et));
-        resacc_sigM_ks[i]->setParameterizeIntegral(RooArgSet(*et));
+        resacc_sigD_kst[i]->setParameterizeIntegral(RooArgSet(*et));
+        resacc_sigD_ks[i]->setParameterizeIntegral(RooArgSet(*et));
 
         // Set the fit pdf
-        fitpdf_sigM_kst[i] = new RooBDecay(Form("fitpdf_sigM_kst_%s", parfix[i].c_str()), "", *t, tau_kst, Dgd, RooConst(1.), RooConst(0), RooConst(0), RooConst(0), *Dm, *resacc_sigM_kst[i], RooBDecay::SingleSided);
-        fitpdf_sigM_ks[i] = new RooBDecay(Form("fitpdf_sigM_ks_%s", parfix[i].c_str()), "", *t, tau_ks, Dgd, RooConst(1.), RooConst(0), RooConst(0), RooConst(0), *Dm, *resacc_sigM_ks[i], RooBDecay::SingleSided);
+        fitpdf_sigD_kst[i] = new RooBDecay(Form("fitpdf_sigD_kst_%s", parfix[i].c_str()), "", *t, tau_kst, Dgd, RooConst(1.), RooConst(0), RooConst(0), RooConst(0), *Dm, *resacc_sigD_kst[i], RooBDecay::SingleSided);
+        fitpdf_sigD_ks[i] = new RooBDecay(Form("fitpdf_sigD_ks_%s", parfix[i].c_str()), "", *t, tau_ks, Dgd, RooConst(1.), RooConst(0), RooConst(0), RooConst(0), *Dm, *resacc_sigD_ks[i], RooBDecay::SingleSided);
    }
    RooRealVar *ftau = new RooRealVar("ftau", "", ftau_val);
    // Set the set of pars 
@@ -366,9 +366,9 @@ int main(int argc, char **argv)
    inforpar->add(Dgd);
 
    for (int i = 0; i < ny; i++) {
-        inforpar->add(*coefList_sigM_kst[i]);
-        inforpar->add(*coefList_sigM_ks[i]);
-        inforpar->add(RooArgSet(*res_muM, *sM0, *sM1, *sM2,*b_M1, *c_M1,*b_M2, *c_M2,*b_M3, *c_M3,*f_M1, *f_M2));
+        inforpar->add(*coefList_sigD_kst[i]);
+        inforpar->add(*coefList_sigD_ks[i]);
+        inforpar->add(RooArgSet(*res_muD, *sD0, *sD1, *sD2,*b_M1, *c_M1,*b_M2, *c_M2,*b_M3, *c_M3,*f_M1, *f_M2));
         inforpar->add(*fnll_kst[i]);
         inforpar->add(*fnll_ks[i]);
    }
@@ -380,8 +380,8 @@ int main(int argc, char **argv)
 
    for (int i = 0; i < ny; i++) {
         for (int j = 0; j < nCof; j++) {
-            accM_kst[i][j]->setConstant(1);
-            accM_ks[i][j]->setConstant(1);
+            accD_kst[i][j]->setConstant(1);
+            accD_ks[i][j]->setConstant(1);
         }
    }
    
@@ -392,10 +392,10 @@ int main(int argc, char **argv)
    // Set the i-th accp pars to be fixed as 1
    int ith = 4;
    for (int i = 0; i < ny; i++) {
-        accM_kst[i][ith]->setConstant(1);
-        accM_kst[i][ith]->setVal(1);
-        accM_ks[i][ith]->setConstant(1);
-        accM_ks[i][ith]->setVal(1);
+        accD_kst[i][ith]->setConstant(1);
+        accD_kst[i][ith]->setVal(1);
+        accD_ks[i][ith]->setConstant(1);
+        accD_ks[i][ith]->setVal(1);
    }
 
    if (Dg) Dgd.setVal(dg_val);
@@ -414,11 +414,11 @@ int main(int argc, char **argv)
         for (int i = 0; i < ny; i++) {
             RooArgSet *CondSet = new RooArgSet(*et);
             
-            RooAbsReal *nll_sigM_kst = fitpdf_sigM_kst[i]->createNLL(*data_sigM_kst[i], Optimize(0), ConditionalObservables(*CondSet), NumCPU(nCpu));
-            RooAbsReal *nll_sigM_ks = fitpdf_sigM_ks[i]->createNLL(*data_sigM_ks[i], Optimize(0), ConditionalObservables(*CondSet), NumCPU(nCpu));
+            RooAbsReal *nll_sigD_kst = fitpdf_sigD_kst[i]->createNLL(*data_sigD_kst[i], Optimize(0), ConditionalObservables(*CondSet), NumCPU(nCpu));
+            RooAbsReal *nll_sigD_ks = fitpdf_sigD_ks[i]->createNLL(*data_sigD_ks[i], Optimize(0), ConditionalObservables(*CondSet), NumCPU(nCpu));
             
-            RooFormulaVar *wnll_kst = new RooFormulaVar(Form("wnll_kst_%s", parfix[i].c_str()), "@0*@1", RooArgSet(*nll_sigM_kst, *fnll_kst[i]));
-            RooFormulaVar *wnll_ks = new RooFormulaVar(Form("wnll_ks_%s", parfix[i].c_str()), "@0*@1", RooArgSet(*nll_sigM_ks, *fnll_ks[i]));
+            RooFormulaVar *wnll_kst = new RooFormulaVar(Form("wnll_kst_%s", parfix[i].c_str()), "@0*@1", RooArgSet(*nll_sigD_kst, *fnll_kst[i]));
+            RooFormulaVar *wnll_ks = new RooFormulaVar(Form("wnll_ks_%s", parfix[i].c_str()), "@0*@1", RooArgSet(*nll_sigD_ks, *fnll_ks[i]));
             
             nllList.add(*wnll_kst);
             nllList.add(*wnll_ks);
@@ -466,20 +466,20 @@ int main(int argc, char **argv)
    int nBin = (t_h - t_l) / 0.1;
 
    for (int i = 0; i < ny; i++) {
-        RooDataHist *projdata_kst = new RooDataHist(Form("projdata_kst_%s", parfix[i].c_str()), "", *et, *data_sigM_kst[i]);
-        RooDataHist *projdata_ks = new RooDataHist(Form("projdata_ks_%s", parfix[i].c_str()), "", *et, *data_sigM_ks[i]);
+        RooDataHist *projdata_kst = new RooDataHist(Form("projdata_kst_%s", parfix[i].c_str()), "", *et, *data_sigD_kst[i]);
+        RooDataHist *projdata_ks = new RooDataHist(Form("projdata_ks_%s", parfix[i].c_str()), "", *et, *data_sigD_ks[i]);
 
         RooPlot *vframe_kst = t->frame(Bins(nBin));
         RooPlot *vframe_ks = t->frame(Bins(nBin));
 
-        data_sigM_kst[i]->plotOn(vframe_kst, MarkerSize(0.5));
-        fitpdf_sigM_kst[i]->plotOn(vframe_kst, ProjWData(*projdata_kst), Name(Form("PDF_kst_%s", parfix[i].c_str())));
-        data_sigM_kst[i]->plotOn(vframe_kst, MarkerSize(0.5), Name(Form("Data_kst_%s", parfix[i].c_str())));
+        data_sigD_kst[i]->plotOn(vframe_kst, MarkerSize(0.5));
+        fitpdf_sigD_kst[i]->plotOn(vframe_kst, ProjWData(*projdata_kst), Name(Form("PDF_kst_%s", parfix[i].c_str())));
+        data_sigD_kst[i]->plotOn(vframe_kst, MarkerSize(0.5), Name(Form("Data_kst_%s", parfix[i].c_str())));
         vframe_kst->SetMinimum(1e-2);
 
-        data_sigM_ks[i]->plotOn(vframe_ks, MarkerSize(0.5));
-        fitpdf_sigM_ks[i]->plotOn(vframe_ks, ProjWData(*projdata_ks), Name(Form("PDF_ks_%s", parfix[i].c_str())));
-        data_sigM_ks[i]->plotOn(vframe_ks, MarkerSize(0.5), Name(Form("Data_ks_%s", parfix[i].c_str())));
+        data_sigD_ks[i]->plotOn(vframe_ks, MarkerSize(0.5));
+        fitpdf_sigD_ks[i]->plotOn(vframe_ks, ProjWData(*projdata_ks), Name(Form("PDF_ks_%s", parfix[i].c_str())));
+        data_sigD_ks[i]->plotOn(vframe_ks, MarkerSize(0.5), Name(Form("Data_ks_%s", parfix[i].c_str())));
         vframe_ks->SetMinimum(1e-2);
 
         // Set logo
@@ -493,48 +493,48 @@ int main(int argc, char **argv)
         char XTitle[] = "#it{t} [ps]";
         char YTitle1[] = "Candidates / ( 0.1 ps )";
         
-        string picname_kst = Form("output/%s_fit_sigmc_kst_%d", prefix.c_str(), years[i]);
-        string picname_ks = Form("output/%s_fit_sigmc_ks_%d", prefix.c_str(), years[i]);
+        string picname_kst = Form("output/%s_fit_sigd_kst_%d", prefix.c_str(), years[i]);
+        string picname_ks = Form("output/%s_fit_sigd_ks_%d", prefix.c_str(), years[i]);
        
         RooSaveFitPlot(Form("Data_kst_%s", parfix[i].c_str()), Form("PDF_kst_%s", parfix[i].c_str()), t, vframe_kst, XTitle, YTitle1, picname_kst.c_str(), 0, 0, 1);
         RooSaveFitPlot(Form("Data_ks_%s", parfix[i].c_str()), Form("PDF_ks_%s", parfix[i].c_str()), t, vframe_ks, XTitle, YTitle1, picname_ks.c_str(), 0, 0, 1);
            // Get the binned acceptance using histogram method for K* and Ks
-          RooBDecay *genpdf_sigM_kst = new RooBDecay(Form("genpdf_sigM_kst_%s", parfix[i].c_str()), "", *t, tau_kst, Dgd, RooConst(1.), RooConst(0), RooConst(0), RooConst(0), *Dm, *resM_kst, RooBDecay::SingleSided);
-          RooBDecay *genpdf_sigM_ks = new RooBDecay(Form("genpdf_sigM_ks_%s", parfix[i].c_str()), "", *t, tau_ks, Dgd, RooConst(1.),RooConst(0), RooConst(0), RooConst(0), *Dm, *resM_ks, RooBDecay::SingleSided);
+          RooBDecay *genpdf_sigD_kst = new RooBDecay(Form("genpdf_sigD_kst_%s", parfix[i].c_str()), "", *t, tau_kst, Dgd, RooConst(1.), RooConst(0), RooConst(0), RooConst(0), *Dm, *resD_kst, RooBDecay::SingleSided);
+          RooBDecay *genpdf_sigD_ks = new RooBDecay(Form("genpdf_sigD_ks_%s", parfix[i].c_str()), "", *t, tau_ks, Dgd, RooConst(1.),RooConst(0), RooConst(0), RooConst(0), *Dm, *resD_ks, RooBDecay::SingleSided);
 
           const int hBin1 = 100;
-          TH1D *hselt_sigM_kst = new TH1D(Form("hselt_sigM_kst_%s", parfix[i].c_str()), "", hBin1, t_l, t_h);
-          TH1D *hselt_sigM_ks = new TH1D(Form("hselt_sigM_ks_%s", parfix[i].c_str()), "", hBin1, t_l, t_h);
-          TH1D *htacc_sigM_kst = new TH1D(Form("htacc_sigM_kst_%s", parfix[i].c_str()), "", hBin1, t_l, t_h);
-          TH1D *htacc_sigM_ks = new TH1D(Form("htacc_sigM_ks_%s", parfix[i].c_str()), "", hBin1, t_l, t_h);
+          TH1D *hselt_sigD_kst = new TH1D(Form("hselt_sigD_kst_%s", parfix[i].c_str()), "", hBin1, t_l, t_h);
+          TH1D *hselt_sigD_ks = new TH1D(Form("hselt_sigD_ks_%s", parfix[i].c_str()), "", hBin1, t_l, t_h);
+          TH1D *htacc_sigD_kst = new TH1D(Form("htacc_sigD_kst_%s", parfix[i].c_str()), "", hBin1, t_l, t_h);
+          TH1D *htacc_sigD_ks = new TH1D(Form("htacc_sigD_ks_%s", parfix[i].c_str()), "", hBin1, t_l, t_h);
 
-          data_sigM_kst[i]->fillHistogram(hselt_sigM_kst, *t);
-          data_sigM_ks[i]->fillHistogram(hselt_sigM_ks, *t);
+          data_sigD_kst[i]->fillHistogram(hselt_sigD_kst, *t);
+          data_sigD_ks[i]->fillHistogram(hselt_sigD_ks, *t);
 
-          TH1D *hgent_sigM_kst = (TH1D *)genpdf_sigM_kst->createHistogram(Form("hgent_sigM_kst_%s", parfix[i].c_str()), *t, ProjWData(*projdata_kst), Binning(hBin1, t_l, t_h));
-          TH1D *hgent_sigM_ks = (TH1D *)genpdf_sigM_ks->createHistogram(Form("hgent_sigM_ks_%s", parfix[i].c_str()), *t, ProjWData(*projdata_ks), Binning(hBin1, t_l, t_h));
+          TH1D *hgent_sigD_kst = (TH1D *)genpdf_sigD_kst->createHistogram(Form("hgent_sigD_kst_%s", parfix[i].c_str()), *t, ProjWData(*projdata_kst), Binning(hBin1, t_l, t_h));
+          TH1D *hgent_sigD_ks = (TH1D *)genpdf_sigD_ks->createHistogram(Form("hgent_sigD_ks_%s", parfix[i].c_str()), *t, ProjWData(*projdata_ks), Binning(hBin1, t_l, t_h));
 
-          hgent_sigM_kst->Scale(hselt_sigM_kst->Integral() / hgent_sigM_kst->Integral());
-          hgent_sigM_ks->Scale(hselt_sigM_ks->Integral() / hgent_sigM_ks->Integral());
+          hgent_sigD_kst->Scale(hselt_sigD_kst->Integral() / hgent_sigD_kst->Integral());
+          hgent_sigD_ks->Scale(hselt_sigD_ks->Integral() / hgent_sigD_ks->Integral());
 
-          for (int j = 0; j < hgent_sigM_kst->GetNbinsX(); j++) {
-               hgent_sigM_kst->SetBinError(j, 0);
-               hgent_sigM_ks->SetBinError(j, 0);
+          for (int j = 0; j < hgent_sigD_kst->GetNbinsX(); j++) {
+               hgent_sigD_kst->SetBinError(j, 0);
+               hgent_sigD_ks->SetBinError(j, 0);
           }
 
-          double sum_sigM_kst = 0;
-          double sum_sigM_ks = 0;
-          for (int j = 0; j < htacc_sigM_kst->GetNbinsX(); j++) {
-               *t = hgent_sigM_kst->GetBinCenter(j + 1);
-               sum_sigM_kst += hgent_sigM_kst->GetBinContent(j + 1) * ACC_sigM_kst[i]->getVal(*t);
-               sum_sigM_ks += hgent_sigM_ks->GetBinContent(j + 1) * ACC_sigM_ks[i]->getVal(*t);
+          double sum_sigD_kst = 0;
+          double sum_sigD_ks = 0;
+          for (int j = 0; j < htacc_sigD_kst->GetNbinsX(); j++) {
+               *t = hgent_sigD_kst->GetBinCenter(j + 1);
+               sum_sigD_kst += hgent_sigD_kst->GetBinContent(j + 1) * ACC_sigD_kst[i]->getVal(*t);
+               sum_sigD_ks += hgent_sigD_ks->GetBinContent(j + 1) * ACC_sigD_ks[i]->getVal(*t);
           }
 
-          htacc_sigM_kst->Divide(hselt_sigM_kst, hgent_sigM_kst, sum_sigM_kst, hgent_sigM_kst->Integral());
-          htacc_sigM_ks->Divide(hselt_sigM_ks, hgent_sigM_ks, sum_sigM_ks, hgent_sigM_ks->Integral());
+          htacc_sigD_kst->Divide(hselt_sigD_kst, hgent_sigD_kst, sum_sigD_kst, hgent_sigD_kst->Integral());
+          htacc_sigD_ks->Divide(hselt_sigD_ks, hgent_sigD_ks, sum_sigD_ks, hgent_sigD_ks->Integral());
 
-          RooDataHist *adata_sigM_kst = new RooDataHist(Form("adata_sigM_kst_%s", parfix[i].c_str()), "", RooArgSet(*t), htacc_sigM_kst);
-          RooDataHist *adata_sigM_ks = new RooDataHist(Form("adata_sigM_ks_%s", parfix[i].c_str()), "", RooArgSet(*t), htacc_sigM_ks);
+          RooDataHist *adata_sigD_kst = new RooDataHist(Form("adata_sigD_kst_%s", parfix[i].c_str()), "", RooArgSet(*t), htacc_sigD_kst);
+          RooDataHist *adata_sigD_ks = new RooDataHist(Form("adata_sigD_ks_%s", parfix[i].c_str()), "", RooArgSet(*t), htacc_sigD_ks);
 
           // Save the acceptance plots for K* and Ks for each year
           Color_t FCol[5] = { kOrange,   kAzure+1, kMagenta-9, kPink-4, kGray };
@@ -545,8 +545,8 @@ int main(int argc, char **argv)
                Form("#it{#varepsilon}^{#it{J/#psiK_{S}^{0}}}_{data}(%d)", years[i])  // ks
           };
 
-          string accpic_kst = Form("%s_acc_sigM_kst_%d", prefix.c_str(), years[i]);
-          string accpic_ks = Form("%s_acc_sigM_ks_%d", prefix.c_str(), years[i]);
+          string accpic_kst = Form("%s_acc_sigD_kst_%d", prefix.c_str(), years[i]);
+          string accpic_ks = Form("%s_acc_sigD_ks_%d", prefix.c_str(), years[i]);
 
           TPaveText *logo2 = new TPaveText(0.22, 0.80, 0.30, 0.90, "BRNDC");
           logo2->AddText(Form("#font[132]{LHCb Run 2 data, 5.4 fb^{-1}}"));
@@ -559,22 +559,22 @@ int main(int argc, char **argv)
           aframe_ks->addObject(logo2);
 
           // K* acceptance plot
-          SetAccFrame(aframe_kst, ACC_sigM_kst[i], fitres, 1, FCol[0], LCol[0], "#it{t} [ps]", YTitle[0].c_str());
-          adata_sigM_kst->plotOn(aframe_kst, MarkerSize(0.5));
+          SetAccFrame(aframe_kst, ACC_sigD_kst[i], fitres, 1, FCol[0], LCol[0], "#it{t} [ps]", YTitle[0].c_str());
+          adata_sigD_kst->plotOn(aframe_kst, MarkerSize(0.5));
           aframe_kst->SetMinimum(0.0);
           aframe_kst->SetMaximum(2.2);
           SaveAccPic(aframe_kst, accpic_kst.c_str());
 
           // Ks acceptance plot
-          SetAccFrame(aframe_ks, ACC_sigM_ks[i], fitres, 1, FCol[1], LCol[1], "#it{t} [ps]", YTitle[1].c_str());
-          adata_sigM_ks->plotOn(aframe_ks, MarkerSize(0.5));
+          SetAccFrame(aframe_ks, ACC_sigD_ks[i], fitres, 1, FCol[1], LCol[1], "#it{t} [ps]", YTitle[1].c_str());
+          adata_sigD_ks->plotOn(aframe_ks, MarkerSize(0.5));
           aframe_ks->SetMinimum(0.0);
           aframe_ks->SetMaximum(2.2);
           SaveAccPic(aframe_ks, accpic_ks.c_str());
           
           cout << "=========================================" << endl;
-          cout << years[i] << " sigM_kst, chi2_NDOF(5) = " << vframe_kst->chiSquare(Form("PDF_kst_%s", parfix[i].c_str()), Form("Data_kst_%s", parfix[i].c_str()), 1) << endl;
-          cout << years[i] << " sigM_ks, chi2_NDOF(5) = " << vframe_ks->chiSquare(Form("PDF_ks_%s", parfix[i].c_str()), Form("Data_ks_%s", parfix[i].c_str()), 1) << endl;
+          cout << years[i] << " sigD_kst, chi2_NDOF(5) = " << vframe_kst->chiSquare(Form("PDF_kst_%s", parfix[i].c_str()), Form("Data_kst_%s", parfix[i].c_str()), 1) << endl;
+          cout << years[i] << " sigD_ks, chi2_NDOF(5) = " << vframe_ks->chiSquare(Form("PDF_ks_%s", parfix[i].c_str()), Form("Data_ks_%s", parfix[i].c_str()), 1) << endl;
           cout << "=========================================" << endl;
 
                
