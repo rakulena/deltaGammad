@@ -16,13 +16,13 @@ path:./dgd/timeAcc/fitTimeAcc.cpp
     line 635-653:Change the plot titles depending on the samples you use 
 
 
-### Obtain the time acceptance results
-- Use the the time acceptance results obtained in step1 to generate './dgd/dgdfit/parinfor_base_allyears.dat',refering to './dgd/update_parameters.cpp'
+- 2.Obtain the time acceptance results
+-- Use the the time acceptance results obtained in step1 to generate './dgd/dgdfit/parinfor_base_allyears.dat',refering to './dgd/update_parameters.cpp'
     1. Separately run step1 with Bd2JpsiKs and Bd2JpsiKst and copy the 'parinfor' folder to corresponding directory 'jpsiks' and 'jpsikst'
     2. Set the paths in main function practically in 'update_parameters.cpp'.
     3. run'g++ -o update_parameters update_parameters.cpp'     
 
-- 2.fit decay-time to extract dgd
+- 3.fit decay-time to extract dgd
 path:./dgd/dgdfit/fitTimeAcc.cpp
 
     line 181-182:Set the paths of Bd->JpsiKshort and Bd->JpsiKstar
