@@ -1,8 +1,14 @@
+## Introduction
+
 This program performs massfit for Bd2JpsiKstar and Bd2JpsiKshort,divided into two stages:massfit before BDT and massfit after BDT.
 
 massfit before BDT:presel_kst/presel_ks
 
 massfit after BDT:fulsel_kst/fulsel_ks
+
+## Enviroment 
+
+'source /cvmfs/sft.cern.ch/lcg/releases/LCG_102b/ROOT/6.26.08/x86_64-centos9-gcc11-opt/ROOT-env.sh'
 
 ## Step
 - 1.Modify data_xxxx and mc_xxxx:
