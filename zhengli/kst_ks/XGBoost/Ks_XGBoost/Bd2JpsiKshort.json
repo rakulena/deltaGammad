@@ -1,0 +1,24 @@
+{
+    "mother" : "Bd",
+    "decay" : "Bd2JpsiKshort",
+    "candidate" : "J/#psi K#short",
+    "signal_range": [5230, 5330], 
+    "bkg_range_right": [5330,5450],
+    "bkg_range_left": [5230,5230],
+    "BDT_vars" : [ 
+      "Bd_PT","min_mu_ProbNNmu_corr",
+      "piplus_ProbNNpi_corr","piminus_ProbNNpi_corr",
+      "log_Bd_IPCHI2_OWNPV","log_Bd_ENDVERTEX_CHI2NDOF",
+      "Kshort_PT","log_Bd_OnlyPV_CHI2NDOF"
+], 
+   
+    "BDT_conf": {    
+        "n_estimators" : 100,
+        "learning_rate": 0.10,
+        "min_child_weight" : 50
+    },
+    "BDT_vars_unused" : ["fmin(muplus_PT,muminus_PT)","Bd_PT","fmin(piplus_PT, piminus_PT)","Ks_PZ","Bd_LOKI_ETA"]
+   
+}
+
+

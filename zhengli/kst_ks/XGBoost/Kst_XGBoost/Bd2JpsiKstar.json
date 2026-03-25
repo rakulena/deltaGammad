@@ -1,0 +1,20 @@
+{
+    "mother" : "Bd",
+    "decay" : "Bd2JpsiKstar",
+    "candidate" : "J/#psi K#star",
+    "signal_range": [5230, 5330], 
+    "bkg_range_right": [5330,5350],
+    "bkg_range_left": [5230,5230],
+    "BDT_vars" : [ "Bd_PT","min_mu_ProbNNmu_corr",
+    "Kplus_ProbNNk_corr","piminus_ProbNNpi_corr",
+    "log_Bd_IPCHI2_OWNPV","log_Bd_ENDVERTEX_CHI2NDOF",
+    "h_sum_PT","log_Bd_OnlyPV_CHI2NDOF"
+    ],
+    "BDT_conf": {    
+        "n_estimators" : 50,
+        "learning_rate": 0.25,
+        "min_child_weight" : 50
+    },
+    "BDT_vars_unused" : ["Xi_ENDVERTEX_CHI2", "Lb_PT", "Lb_ENDVERTEX_CHI2", "Xi_IPCHI2_OWNPV", "K_IPCHI2_OWNPV"]
+}
+
