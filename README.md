@@ -10,7 +10,7 @@ This repository is used to measure the uncertainty of ΔΓ_d through simultaneou
 
 ## Enviroment
 
-'source /cvmfs/sft.cern.ch/lcg/releases/LCG_102b/ROOT/6.26.08/x86_64-centos9-gcc11-opt/ROOT-env.sh'
+- 'source /cvmfs/sft.cern.ch/lcg/releases/LCG_102b/ROOT/6.26.08/x86_64-centos9-gcc11-opt/ROOT-env.sh'
 
-'lb-conda default'for gbweight and XGBoost'
-  — required for GB Reweighting and XGBoost (not needed if packages are already installed)
+- 'lb-conda default/2024-07-10'
+  for gbweight and XGBoost'— required for GB Reweighting and XGBoost (not needed if packages are already installed)
