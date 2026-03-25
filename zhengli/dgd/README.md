@@ -1,4 +1,4 @@
-This folder is used to fit the time acceptance and perform a decay-time fit to measure deltagammad with Bd->JpsiKshort and Bd->JpsiKstar
+This folder is used to fit the time acceptance and perform a decay-time fit to measure deltagammad with Bd2JpsiKshort and Bd2JpsiKstar
 
 ## Struction 
 - timeAcc: fit time acceptance by signal and control samples
@@ -31,7 +31,7 @@ This folder is used to fit the time acceptance and perform a decay-time fit to m
 
     path:./dgd/dgdfit/fitTimeAcc.cpp
 
-    1. line 181-182:Set the paths of Bd->JpsiKshort and Bd->JpsiKstar
+    1. line 181-182:Set the paths of Bd2JpsiKshort and Bd2JpsiKstar
     2. line 189-198：Shared parameters
            
 ## Command
