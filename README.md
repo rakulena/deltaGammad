@@ -4,7 +4,13 @@ This repository is used to measure the uncertainty of deltaGammad through simult
 
 ## Structure
 
-- kst_ks: Suppresses background events. Includes preselection, sWeight calculation via mass fit, MC kinematic correction using GB Reweighting, MVA with XGBoost, optimal BDT cut selection based on figure of merit, and final application of the BDT cut.
+- kst_ks: Suppresses background events.
+  1. get_root: preselection,
+  2. massfit\presel_ks (or presel_kst): sWeight calculation via mass fit,
+  3. gbweight: MC kinematic correction using GB Reweighting,
+  4. XGBoost: MVA with XGBoost, optimal BDT cut selection based on figure of merit,
+  5. massfit\fulsel_ks (or fulsel_kst): final application of the BDT cut,
+  6. comp: check time bias on BDT with the time acceptance.
 
 - dgd: Extracts the time acceptance function using triple spline from signal and control samples with fixed τ, then determines ΔΓ_d with the fixed time acceptance after accounting for CP violation effects.
 
