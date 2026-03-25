@@ -6,7 +6,7 @@ Bd2JpsiKstar:Kst_XGBoost
 
 Bd2JpsiKshort:Ks_XGBoost
 
-# Step(exampled as Bd2JpsiKstar)
+## Step(exampled as Bd2JpsiKstar)
 
 - 1.Set enviroment configuration
   
