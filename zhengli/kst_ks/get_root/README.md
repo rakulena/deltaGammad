@@ -25,7 +25,7 @@ kst_reduce and ks_reduce
   
   /path/makeHeadfile/MakeHeadfile -f filelist/mc_2016 -n reduce .
 
-If data and MC branches differ, manually adjust the generated headfile to match your data structure.
+  If data and MC branches differ, manually adjust the generated headfile to match your data structure.
 
 - 4.Compile the reduce.cpp through "make"
 
