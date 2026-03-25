@@ -1,3 +1,5 @@
+## Intruoduction
+
 This program trains BDT classifiers using XGBoost to distinguish signal from background events, aiming to find the optimal BDT cut by maximizing the figure of merit (F.O.M). The analysis is divided into two channels
 
 Bd2JpsiKstar:Kst_XGBoost
