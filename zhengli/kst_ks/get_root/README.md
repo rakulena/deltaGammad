@@ -3,8 +3,8 @@ kst_reduce and ks_reduce
 
 ## Step
 - 1.Modify data_xxxx and mc_xxxx:
-   1. Line 1: /Path/filename.root/TTree
-   2. Line 2: /Path/filename.root
+   --1. Line 1: /Path/filename.root/TTree
+   --2. Line 2: /Path/filename.root
 
 - 2.Modify reduce.cpp:
 Add or delete branches and cut as needed.
