@@ -9,7 +9,7 @@ source /cvmfs/sft.cern.ch/lcg/releases/LCG_102b/ROOT/6.26.08/x86_64-centos9-gcc1
 ## Step
 - 1.Extract the time acceptance of Bd->JpsiKshort and Bd->JpsiKstar
 
-    -- path:./dgd/timeAcc/fitTimeAcc.cpp
+   ' path:./dgd/timeAcc/fitTimeAcc.cpp '
 
     line 106-109:Set the paths to the signal and control samples.
     line 172-186:Adjust input settings and cuts.
