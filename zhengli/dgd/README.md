@@ -8,7 +8,8 @@ source /cvmfs/sft.cern.ch/lcg/releases/LCG_102b/ROOT/6.26.08/x86_64-centos9-gcc1
 
 ## Step
 - 1.Extract the time acceptance of Bd->JpsiKshort and Bd->JpsiKstar
-path:./dgd/timeAcc/fitTimeAcc.cpp
+
+    -- path:./dgd/timeAcc/fitTimeAcc.cpp
 
     line 106-109:Set the paths to the signal and control samples.
     line 172-186:Adjust input settings and cuts.
@@ -25,7 +26,8 @@ path:./dgd/timeAcc/fitTimeAcc.cpp
     3. run'g++ -o update_parameters update_parameters.cpp'     
 
 - 3.fit decay-time to extract dgd
-path:./dgd/dgdfit/fitTimeAcc.cpp
+
+    -- path:./dgd/dgdfit/fitTimeAcc.cpp
 
     line 181-182:Set the paths of Bd->JpsiKshort and Bd->JpsiKstar
     line 189-198：Shared parameters
