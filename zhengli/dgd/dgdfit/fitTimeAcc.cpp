@@ -209,7 +209,7 @@ int main(int argc, char **argv)
    RooRealVar* fnll_kst[ny];
    RooRealVar* fnll_ks[ny];
      // Set resolution function
-     //jpsikst from bd2jpsipipi
+     //jpsikst data from bd2jpsipipi data
      RooRealVar *res_muD = new RooRealVar("res_muD_kst", "mean value", 0, -0.1, 0.1, "ps");
      RooRealVar *sD0 = new RooRealVar("sD0_kst", "", 0.00985331);
      RooRealVar *sD1 = new RooRealVar("sD1_kst", "", 0.494388);
@@ -223,13 +223,13 @@ int main(int argc, char **argv)
      sD1->setConstant(true); 
      sD2->setConstant(true);
 
-     //jpsiks from sin2beta
-     RooRealVar *b_M1 = new RooRealVar("b_M1", "", 0.041, -0.1, 0.2, "ps"); 
-     RooRealVar *c_M1 = new RooRealVar("c_M1", "", 10.9, 5.0, 15.0);
-     RooRealVar *b_M2 = new RooRealVar("b_M2", "", 0.0071, -0.02, 0.03, "ps");
-     RooRealVar *c_M2 = new RooRealVar("c_M2", "", 1.708, 1.0, 3.0);
-     RooRealVar *b_M3 = new RooRealVar("b_M3", "", 0.00158, -0.01, 0.01, "ps");
-     RooRealVar *c_M3 = new RooRealVar("c_M3", "", 0.9328, 0.8, 1.2);
+     //jpsiks data from sin2beta LL mc
+     RooRealVar *b_M1 = new RooRealVar("b_M1", "", -0.235, -0.5, 0.0, "ps");
+     RooRealVar *c_M1 = new RooRealVar("c_M1", "", 17.87, 15.0, 20.0);
+     RooRealVar *b_M2 = new RooRealVar("b_M2", "", -0.0018, -0.01, 0.01, "ps");
+     RooRealVar *c_M2 = new RooRealVar("c_M2", "", 1.97, 1.0, 3.0);
+     RooRealVar *b_M3 = new RooRealVar("b_M3", "", 0.00034, -0.005, 0.005, "ps");
+     RooRealVar *c_M3 = new RooRealVar("c_M3", "", 0.983, 0.8, 1.2);
      // sigma = c * et + b
      RooFormulaVar *sigma_g1 = new RooFormulaVar("sigma_g1", "abs(@0*@1 + @2)", RooArgList(*c_M1, *et, *b_M1));
      RooFormulaVar *sigma_g2 = new RooFormulaVar("sigma_g2", "abs(@0*@1 + @2)", RooArgList(*c_M2, *et, *b_M2));
@@ -237,8 +237,8 @@ int main(int argc, char **argv)
      RooGaussModel *gauss1 = new RooGaussModel("gauss1", "", *t, *res_muD, *sigma_g1);
      RooGaussModel *gauss2 = new RooGaussModel("gauss2", "", *t, *res_muD, *sigma_g2);
      RooGaussModel *gauss3 = new RooGaussModel("gauss3", "", *t, *res_muD, *sigma_g3);
-     RooRealVar *f_M1 = new RooRealVar("f_M1", "", 0.00240, 0.0, 0.01);
-     RooRealVar *f_M2 = new RooRealVar("f_M2", "", 0.082, 0.0, 0.2);
+     RooRealVar *f_M1 = new RooRealVar("f_M1", "", 0.00430, 0.0, 0.01);
+     RooRealVar *f_M2 = new RooRealVar("f_M2", "", 0.091, 0.0, 0.2);
      b_M1->setConstant(true);
      c_M1->setConstant(true);
      b_M2->setConstant(true);
