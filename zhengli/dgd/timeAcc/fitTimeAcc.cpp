@@ -274,7 +274,7 @@ int main(int argc, char **argv)
    data_conD->Print();
    cout<<"---------------------------------------------------"<<endl;
 
-   // Set resolution function for data and mc
+ // Set resolution function for data and mc
    //jpsikst mc & bu2jpsik mc from bd2jpsipipi mc,,bu2jpsik data from bd2jpsipipi data
  
    // RooRealVar *res_muD = new RooRealVar("res_muD","mean value",0,-0.1,0.1,"ps");
@@ -282,6 +282,9 @@ int main(int argc, char **argv)
    // res_muD->setConstant(true);
    // res_muM->setConstant(true);
 
+   // RooRealVar *sD0 = new RooRealVar(Form("s%s_D0", parfix.c_str()), "", 0.00985331);
+   // RooRealVar *sD1 = new RooRealVar(Form("s%s_D1", parfix.c_str()), "", 0.494388);
+   // RooRealVar *sD2 = new RooRealVar(Form("s%s_D2", parfix.c_str()), "", 9.07483); 
    // RooRealVar *sM0 = new RooRealVar(Form("s%s_M0",parfix.c_str()),"",5.7001e-03,0,0.1);
    // RooRealVar *sM1 = new RooRealVar(Form("s%s_M1",parfix.c_str()),"",6.5188e-01,-20,20);
    // RooRealVar *sM2 = new RooRealVar(Form("s%s_M2",parfix.c_str()),"",3.9518e+00,-20,20);  
@@ -336,7 +339,7 @@ int main(int argc, char **argv)
    c_M3->setConstant(true);
    f_M1->setConstant(true); 
    f_M2->setConstant(true);  
-   RooAddModel *resM = new RooAddModel("resM", "3 Gaussian",RooArgList(*gauss1, *gauss2, *gauss3),RooArgList(*f_M1, *f_M2));
+   RooAddModel *resM = new RooAddModel("resM", "3 Gaussian",RooArgList(*gauss1, *gauss2, *gauss3),RooArgList(*f_M1, *f_M2));   
    
 
    // Set acc functions
