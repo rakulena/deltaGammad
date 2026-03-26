@@ -275,7 +275,7 @@ int main(int argc, char **argv)
    cout<<"---------------------------------------------------"<<endl;
 
    // Set resolution function for data and mc
-   //jpsikst from bd2jpsipipi
+   //jpsikst mc & bu2jpsik mc from bd2jpsipipi mc,,bu2jpsik data from bd2jpsipipi data
  
    // RooRealVar *res_muD = new RooRealVar("res_muD","mean value",0,-0.1,0.1,"ps");
    // RooRealVar *res_muM = new RooRealVar("res_muM","mean value",0,-0.1,0.1,"ps");
@@ -297,7 +297,7 @@ int main(int argc, char **argv)
    // RooGaussModel *resD = new RooGaussModel("resD","", *t, *res_muD, *wd1D);
    // RooGaussModel *resM = new RooGaussModel("resM","", *t, *res_muM, *wd1M);
 
-   //jpsiks from sin2beta LL
+   //jpsiks mc & bu2jpsik mc from sin2beta LL mc ,bu2jpsik data from bd2jpsipipi data
    RooRealVar *res_muD = new RooRealVar("res_muD", "mean value", 0, -0.1, 0.1, "ps");
    RooRealVar *res_muM = new RooRealVar("res_muM", "mean value", 0, -0.1, 0.1, "ps"); 
    res_muD->setConstant(true);
@@ -309,14 +309,14 @@ int main(int argc, char **argv)
 
    RooFormulaVar *wd1D = new RooFormulaVar("wd1D", "abs(@1+@2*@0+@3*@0*@0)",RooArgSet(*et, *sD0, *sD1, *sD2));
    RooGaussModel *resD = new RooGaussModel("resD", "", *t, *res_muD, *wd1D);
-   RooRealVar *b_M1 = new RooRealVar(Form("b%s_M1", parfix.c_str()), "", 0.041, -0.1, 0.2, "ps"); 
-   RooRealVar *c_M1 = new RooRealVar(Form("c%s_M1", parfix.c_str()), "",10.9, 5.0, 15.0);
+   RooRealVar *b_M1 = new RooRealVar(Form("b%s_M1", parfix.c_str()), "", -0.235, -0.5, 0.0, "ps");
+   RooRealVar *c_M1 = new RooRealVar(Form("c%s_M1", parfix.c_str()), "", 17.87, 15.0, 20.0);
 
-   RooRealVar *b_M2 = new RooRealVar(Form("b%s_M2", parfix.c_str()), "",0.0071, -0.02, 0.03, "ps");
-   RooRealVar *c_M2 = new RooRealVar(Form("c%s_M2", parfix.c_str()), "",1.708, 1.0, 3.0);
+   RooRealVar *b_M2 = new RooRealVar(Form("b%s_M2", parfix.c_str()), "", -0.0018, -0.01, 0.01, "ps");
+   RooRealVar *c_M2 = new RooRealVar(Form("c%s_M2", parfix.c_str()), "", 1.97, 1.0, 3.0);
 
-   RooRealVar *b_M3 = new RooRealVar(Form("b%s_M3", parfix.c_str()), "",0.00158, -0.01, 0.01, "ps");
-   RooRealVar *c_M3 = new RooRealVar(Form("c%s_M3", parfix.c_str()), "",0.9328, 0.8, 1.2);
+   RooRealVar *b_M3 = new RooRealVar(Form("b%s_M3", parfix.c_str()), "", 0.00034, -0.005, 0.005, "ps");
+   RooRealVar *c_M3 = new RooRealVar(Form("c%s_M3", parfix.c_str()), "", 0.983, 0.8, 1.2);
    // sigma = c * et + b
    RooFormulaVar *sigma_g1 = new RooFormulaVar(Form("sigma%s_g1", parfix.c_str()),"@0*@1 + @2", RooArgList(*c_M1, *et, *b_M1));
    RooFormulaVar *sigma_g2 = new RooFormulaVar(Form("sigma%s_g2", parfix.c_str()),"@0*@1 + @2", RooArgList(*c_M2, *et, *b_M2));
@@ -326,8 +326,8 @@ int main(int argc, char **argv)
    RooGaussModel *gauss2 = new RooGaussModel(Form("gauss2_%s", parfix.c_str()), "",*t, *res_muM, *sigma_g2);
    RooGaussModel *gauss3 = new RooGaussModel(Form("gauss3_%s", parfix.c_str()), "",*t, *res_muM, *sigma_g3);
 
-   RooRealVar *f_M1 = new RooRealVar(Form("f%s_M1", parfix.c_str()), "",0.00240, 0.0, 0.01);
-   RooRealVar *f_M2 = new RooRealVar(Form("f%s_M2", parfix.c_str()), "",0.082, 0.0, 0.2); 
+   RooRealVar *f_M1 = new RooRealVar(Form("f%s_M1", parfix.c_str()), "",0.00430, 0.0, 0.01);
+   RooRealVar *f_M2 = new RooRealVar(Form("f%s_M2", parfix.c_str()), "",0.091, 0.0, 0.2); 
    b_M1->setConstant(true);
    c_M1->setConstant(true);
    b_M2->setConstant(true);
@@ -809,4 +809,6 @@ int main(int argc, char **argv)
    cout<<"==========================================="<<endl;
 #endif
 }
+
+
 
