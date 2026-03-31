@@ -53,11 +53,11 @@ This program is used to fit the time acceptance and perform a decay-time fit to 
 
     main code :fitDgd.cpp
 
-    1. line 181-182:Set the paths of Bd2JpsiKshort and Bd2JpsiKstar.
+    1. line 179-180:Set the paths of Bd2JpsiKshort and Bd2JpsiKstar.
     
     The point can be modified by using "run_fitdgd.sh"
 
-    2. line 189-198：Shared parameters.
+    2. line 183-196：Shared parameters.
 
 
 ## Command
