@@ -15,14 +15,14 @@ CC = g++ ${DBG} $(RCXX) $(OPTCOMP)
 Src = ../src/
 
 ### targets
-all: fitTimeAcc
+all: fitDgd
 
-LinkSrc= fitTimeAcc.o  RooBinnedPdf.o RooEffResModel.o RooAbsEffResModel.o RooEffConvGenContext.o RooCubicSplineFun.o RooCubicSplineKnot.o RooAbsGaussModelEfficiency.o
-fitTimeAcc: $(LinkSrc) 
-	$(CC) $(LinkSrc) $(ROOTLIBS) -o fitTimeAcc
+LinkSrc= fitDgd.o  RooBinnedPdf.o RooEffResModel.o RooAbsEffResModel.o RooEffConvGenContext.o RooCubicSplineFun.o RooCubicSplineKnot.o RooAbsGaussModelEfficiency.o
+fitDgd: $(LinkSrc) 
+	$(CC) $(LinkSrc) $(ROOTLIBS) -o fitDgd
 
-fitTimeAcc.o: fitTimeAcc.cpp
-	$(CC) -c fitTimeAcc.cpp -o fitTimeAcc.o
+fitDgd.o: fitDgd.cpp
+	$(CC) -c fitDgd.cpp -o fitDgd.o
 
 RooBinnedPdf.o: ${Src}RooBinnedPdf.cxx ${Src}RooBinnedPdf.h 
 	$(CC) -c ${Src}RooBinnedPdf.cxx -o RooBinnedPdf.o
@@ -50,7 +50,7 @@ clean:
 	rm -rf *.o
 	rm -rf *~
 	rm -rf *_Dict*
-	rm -rf fitTimeAcc
+	rm -rf fitDgd
 clean1:
 	rm -rf *.o
 	rm -rf *~
