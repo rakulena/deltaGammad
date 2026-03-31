@@ -103,10 +103,10 @@ int main(int argc, char **argv)
 
    // sig & con for signal & control channel
    // M & D for mc & data
-   string path_sigM = Form("/lzufs/user/zhanghy/Sample/afterBDT/after_Bd2JpsiKshort_mc_%s_BDT.root/DecayTree",Year.c_str());
-   string path_conM = Form("/lzufs/user/zhanghy/Sample/kplus/mc/v4r0_MC_Bu2JpsiKplus_%s_selected_bdt.root/DecayTree",Year.c_str());
-   string path_sigD = Form("/lzufs/user/zhanghy/Sample/afterBDT/after_Bd2JpsiKshort_data_%s_sw_base.root/DecayTree",Year.c_str());
-   string path_conD = Form("/lzufs/user/zhanghy/Sample/kplus/data/Bu2Jpsikplus_data_%s_sw_base_bdt.root/DecayTree",Year.c_str());
+   string path_sigM = Form("~/Sample/afterBDT/after_Bd2JpsiKstar_mc_%s_BDT.root/DecayTree",Year.c_str());
+   string path_conM = Form("~/Sample/kplus/mc/v4r0_MC_Bu2JpsiKplus_%s_selected_bdt.root/DecayTree",Year.c_str());
+   string path_sigD = Form("~/Sample/afterBDT/after_Bd2JpsiKstar_data_%s_sw_base.root/DecayTree",Year.c_str());
+   string path_conD = Form("~/Sample/kplus/data/Bu2Jpsikplus_data_%s_sw_base_bdt.root/DecayTree",Year.c_str());
 
    string prefix = "base";
    double ftau_val = 0.9261; // ratio for lifetime of signal to control
@@ -120,8 +120,8 @@ int main(int argc, char **argv)
 	ftau_val = 1.076;
 	tau_sigM_val = 1.638;
 
-	string path_sigM = Form("/lzufs/user/zhanghy/Sample/afterBDT/after_Bd2JpsiKstar_mc_%s_BDT.root/DecayTree",Year.c_str());
-	string path_sigD = Form("/lzufs/user/zhanghy/Sample/afterBDT/after_Bd2JpsiKstar_data_%s_sw_base.root/DecayTree",Year.c_str());
+	string path_sigM = Form("~/Sample/afterBDT/after_Bd2JpsiKstar_mc_%s_BDT.root/DecayTree",Year.c_str());
+	string path_sigD = Form("~/Sample/afterBDT/after_Bd2JpsiKstar_data_%s_sw_base.root/DecayTree",Year.c_str());
  }
    if( Dg ){
 	prefix = "dg";
@@ -274,72 +274,66 @@ int main(int argc, char **argv)
    data_conD->Print();
    cout<<"---------------------------------------------------"<<endl;
 
- // Set resolution function for data and mc
-   //jpsikst mc & bu2jpsik mc from bd2jpsipipi mc,,bu2jpsik data from bd2jpsipipi data
- 
-   // RooRealVar *res_muD = new RooRealVar("res_muD","mean value",0,-0.1,0.1,"ps");
-   // RooRealVar *res_muM = new RooRealVar("res_muM","mean value",0,-0.1,0.1,"ps");
-   // res_muD->setConstant(true);
-   // res_muM->setConstant(true);
-
-   // RooRealVar *sD0 = new RooRealVar(Form("s%s_D0", parfix.c_str()), "", 0.00985331);
-   // RooRealVar *sD1 = new RooRealVar(Form("s%s_D1", parfix.c_str()), "", 0.494388);
-   // RooRealVar *sD2 = new RooRealVar(Form("s%s_D2", parfix.c_str()), "", 9.07483); 
-   // RooRealVar *sM0 = new RooRealVar(Form("s%s_M0",parfix.c_str()),"",5.7001e-03,0,0.1);
-   // RooRealVar *sM1 = new RooRealVar(Form("s%s_M1",parfix.c_str()),"",6.5188e-01,-20,20);
-   // RooRealVar *sM2 = new RooRealVar(Form("s%s_M2",parfix.c_str()),"",3.9518e+00,-20,20);  
-   // sD0->setConstant(true);
-   // sD1->setConstant(true);
-   // sD2->setConstant(true);
-   // sM0->setConstant(true);
-   // sM1->setConstant(true);
-   // sM2->setConstant(true);
-   // RooFormulaVar *wd1D = new RooFormulaVar("wd1D","abs(@1+@2*@0+@3*@0*@0)",RooArgSet(*et,*sD0,*sD1,*sD2));
-   // RooFormulaVar *wd1M = new RooFormulaVar("wd1M","abs(@1+@2*@0+@3*@0*@0)",RooArgSet(*et,*sM0,*sM1,*sM2));
-
-   // RooGaussModel *resD = new RooGaussModel("resD","", *t, *res_muD, *wd1D);
-   // RooGaussModel *resM = new RooGaussModel("resM","", *t, *res_muM, *wd1M);
-
-   //jpsiks mc & bu2jpsik mc from sin2beta LL mc ,bu2jpsik data from bd2jpsipipi data
-   RooRealVar *res_muD = new RooRealVar("res_muD", "mean value", 0, -0.1, 0.1, "ps");
-   RooRealVar *res_muM = new RooRealVar("res_muM", "mean value", 0, -0.1, 0.1, "ps"); 
+   // Set resolution function for data and mc
+   //bu2jpsik data from bd2jpsipipi data
+   RooRealVar *res_muD = new RooRealVar("res_muD","mean value",0,-0.1,0.1,"ps");
+   RooRealVar *res_muM = new RooRealVar("res_muM","mean value",0,-0.1,0.1,"ps");
    res_muD->setConstant(true);
-   res_muM->setConstant(true); 
+   res_muM->setConstant(true);
 
    RooRealVar *sD0 = new RooRealVar(Form("s%s_D0", parfix.c_str()), "", 0.00985331);
    RooRealVar *sD1 = new RooRealVar(Form("s%s_D1", parfix.c_str()), "", 0.494388);
    RooRealVar *sD2 = new RooRealVar(Form("s%s_D2", parfix.c_str()), "", 9.07483); 
+   
+   sD0->setConstant(true);
+   sD1->setConstant(true);
+   sD2->setConstant(true);
 
-   RooFormulaVar *wd1D = new RooFormulaVar("wd1D", "abs(@1+@2*@0+@3*@0*@0)",RooArgSet(*et, *sD0, *sD1, *sD2));
-   RooGaussModel *resD = new RooGaussModel("resD", "", *t, *res_muD, *wd1D);
-   RooRealVar *b_M1 = new RooRealVar(Form("b%s_M1", parfix.c_str()), "", -0.235, -0.5, 0.0, "ps");
-   RooRealVar *c_M1 = new RooRealVar(Form("c%s_M1", parfix.c_str()), "", 17.87, 15.0, 20.0);
+   RooFormulaVar *wd1D = new RooFormulaVar("wd1D","abs(@1+@2*@0+@3*@0*@0)",RooArgSet(*et,*sD0,*sD1,*sD2));
+   RooGaussModel *resD = new RooGaussModel("resD","", *t, *res_muD, *wd1D);
+   
 
-   RooRealVar *b_M2 = new RooRealVar(Form("b%s_M2", parfix.c_str()), "", -0.0018, -0.01, 0.01, "ps");
-   RooRealVar *c_M2 = new RooRealVar(Form("c%s_M2", parfix.c_str()), "", 1.97, 1.0, 3.0);
+   //jpsikst mc & bu2jpsik mc from bd2jpsipipi mc
+ 
 
-   RooRealVar *b_M3 = new RooRealVar(Form("b%s_M3", parfix.c_str()), "", 0.00034, -0.005, 0.005, "ps");
-   RooRealVar *c_M3 = new RooRealVar(Form("c%s_M3", parfix.c_str()), "", 0.983, 0.8, 1.2);
+   RooRealVar *sM0 = new RooRealVar(Form("s%s_M0",parfix.c_str()),"",5.7001e-03,0,0.1);
+   RooRealVar *sM1 = new RooRealVar(Form("s%s_M1",parfix.c_str()),"",6.5188e-01,-20,20);
+   RooRealVar *sM2 = new RooRealVar(Form("s%s_M2",parfix.c_str()),"",3.9518e+00,-20,20);  
+   
+   RooFormulaVar *wd1M = new RooFormulaVar("wd1M","abs(@1+@2*@0+@3*@0*@0)",RooArgSet(*et,*sM0,*sM1,*sM2));
+   RooGaussModel *resM = new RooGaussModel("resM","", *t, *res_muM, *wd1M);
+
+   //jpsiks mc & bu2jpsik mc from sin2beta LL mc 
+
+   // RooRealVar *b_M1 = new RooRealVar(Form("b%s_M1", parfix.c_str()), "", -0.235, -0.5, 0.0, "ps");
+   // RooRealVar *c_M1 = new RooRealVar(Form("c%s_M1", parfix.c_str()), "", 17.87, 15.0, 20.0);
+
+   // RooRealVar *b_M2 = new RooRealVar(Form("b%s_M2", parfix.c_str()), "", -0.0018, -0.01, 0.01, "ps");
+   // RooRealVar *c_M2 = new RooRealVar(Form("c%s_M2", parfix.c_str()), "", 1.97, 1.0, 3.0);
+
+   // RooRealVar *b_M3 = new RooRealVar(Form("b%s_M3", parfix.c_str()), "", 0.00034, -0.005, 0.005, "ps");
+   // RooRealVar *c_M3 = new RooRealVar(Form("c%s_M3", parfix.c_str()), "", 0.983, 0.8, 1.2);
    // sigma = c * et + b
-   RooFormulaVar *sigma_g1 = new RooFormulaVar(Form("sigma%s_g1", parfix.c_str()),"@0*@1 + @2", RooArgList(*c_M1, *et, *b_M1));
-   RooFormulaVar *sigma_g2 = new RooFormulaVar(Form("sigma%s_g2", parfix.c_str()),"@0*@1 + @2", RooArgList(*c_M2, *et, *b_M2));
-   RooFormulaVar *sigma_g3 = new RooFormulaVar(Form("sigma%s_g3", parfix.c_str()),"@0*@1 + @2", RooArgList(*c_M3, *et, *b_M3));
+   // RooFormulaVar *sigma_g1 = new RooFormulaVar(Form("sigma%s_g1", parfix.c_str()),"@0*@1 + @2", RooArgList(*c_M1, *et, *b_M1));
+   // RooFormulaVar *sigma_g2 = new RooFormulaVar(Form("sigma%s_g2", parfix.c_str()),"@0*@1 + @2", RooArgList(*c_M2, *et, *b_M2));
+   // RooFormulaVar *sigma_g3 = new RooFormulaVar(Form("sigma%s_g3", parfix.c_str()),"@0*@1 + @2", RooArgList(*c_M3, *et, *b_M3));
 
-   RooGaussModel *gauss1 = new RooGaussModel(Form("gauss1_%s", parfix.c_str()), "",*t, *res_muM, *sigma_g1);
-   RooGaussModel *gauss2 = new RooGaussModel(Form("gauss2_%s", parfix.c_str()), "",*t, *res_muM, *sigma_g2);
-   RooGaussModel *gauss3 = new RooGaussModel(Form("gauss3_%s", parfix.c_str()), "",*t, *res_muM, *sigma_g3);
+   // RooGaussModel *gauss1 = new RooGaussModel(Form("gauss1_%s", parfix.c_str()), "",*t, *res_muM, *sigma_g1);
+   // RooGaussModel *gauss2 = new RooGaussModel(Form("gauss2_%s", parfix.c_str()), "",*t, *res_muM, *sigma_g2);
+   // RooGaussModel *gauss3 = new RooGaussModel(Form("gauss3_%s", parfix.c_str()), "",*t, *res_muM, *sigma_g3);
 
-   RooRealVar *f_M1 = new RooRealVar(Form("f%s_M1", parfix.c_str()), "",0.00430, 0.0, 0.01);
-   RooRealVar *f_M2 = new RooRealVar(Form("f%s_M2", parfix.c_str()), "",0.091, 0.0, 0.2); 
-   b_M1->setConstant(true);
-   c_M1->setConstant(true);
-   b_M2->setConstant(true);
-   c_M2->setConstant(true);
-   b_M3->setConstant(true);
-   c_M3->setConstant(true);
-   f_M1->setConstant(true); 
-   f_M2->setConstant(true);  
-   RooAddModel *resM = new RooAddModel("resM", "3 Gaussian",RooArgList(*gauss1, *gauss2, *gauss3),RooArgList(*f_M1, *f_M2));   
+   // RooRealVar *f_M1 = new RooRealVar(Form("f%s_M1", parfix.c_str()), "",0.00430, 0.0, 0.01);
+   // RooRealVar *f_M2 = new RooRealVar(Form("f%s_M2", parfix.c_str()), "",0.091, 0.0, 0.2); 
+   // b_M1->setConstant(true);
+   // c_M1->setConstant(true);
+   // b_M2->setConstant(true);
+   // c_M2->setConstant(true);
+   // b_M3->setConstant(true);
+   // c_M3->setConstant(true);
+   // f_M1->setConstant(true); 
+   // f_M2->setConstant(true);  
+   // RooAddModel *resM = new RooAddModel("resM", "3 Gaussian",RooArgList(*gauss1, *gauss2, *gauss3),RooArgList(*f_M1, *f_M2));   
+
    
 
    // Set acc functions
@@ -412,9 +406,9 @@ int main(int argc, char **argv)
    RooArgSet *resSet = new RooArgSet();
    resSet->add( RooArgSet( *ftau, *DeltaG, *tau_conD, *tau_sigM, *tau_conM, *res_muD, *res_muM ) );
    //jpsikst
-   //resSet->add( RooArgSet( *sD0, *sD1, *sD2, *sM0, *sM1, *sM2 ) );
+   resSet->add( RooArgSet( *sD0, *sD1, *sD2, *sM0, *sM1, *sM2 ) );
    //jpsiks
-   resSet->add( RooArgSet( *sD0, *sD1, *sD2,*b_M1, *c_M1,*b_M2, *c_M2,*b_M3, *c_M3,*f_M1, *f_M2) );
+   //resSet->add( RooArgSet( *sD0, *sD1, *sD2,*b_M1, *c_M1,*b_M2, *c_M2,*b_M3, *c_M3,*f_M1, *f_M2) );
    RooArgSet *inforpar = new RooArgSet();
    inforpar->add( *coefList_sigM );
    inforpar->add( *coefList_sigD );
@@ -636,18 +630,18 @@ int main(int argc, char **argv)
    Color_t LCol[5] = { kOrange+1, kAzure,   kMagenta,   kPink+8, kBlack };
 
    string YTitle[5] = {
-      //kstar
-   //  "#it{#varepsilon}^{#it{J/#psiK^{*0}}}_{MC}",
-   //  "#it{#varepsilon}^{#it{J/#psiK^{+}}}_{MC}",
-   //  "#it{#varepsilon}^{#it{J/#psiK^{+}}}_{data}",
-   //  "#it{#varepsilon}^{#it{J/#psiK^{+}}}_{data}#times#it{#varepsilon}^{#it{J/#psiK^{*0}}}_{MC}/#it{#varepsilon}^{#it{J/#psiK^{+}}}_{MC}",
-   //  "#it{#varepsilon}^{#it{J/#psiK^{*0}}}_{MC}/#it{#varepsilon}^{#it{J/#psiK^{+}}}_{MC}"
-    //kshort K_{S}^{0}
-     "#it{#varepsilon}^{#it{J/#psiK_{S}^{0}}}_{MC}",
+      //kstar_title
+     "#it{#varepsilon}^{#it{J/#psiK^{*0}}}_{MC}",
 	  "#it{#varepsilon}^{#it{J/#psiK^{+}}}_{MC}",
 	  "#it{#varepsilon}^{#it{J/#psiK^{+}}}_{data}",
-	  "#it{#varepsilon}^{#it{J/#psiK^{+}}}_{data}#times#it{#varepsilon}^{#it{J/#psiK_{S}^{0}}}_{MC}/#it{#varepsilon}^{#it{J/#psiK^{+}}}_{MC}",
-	  "#it{#varepsilon}^{#it{J/#psiK_{S}^{0}}}_{MC}/#it{#varepsilon}^{#it{J/#psiK^{+}}}_{MC}"
+     "#it{#varepsilon}^{#it{J/#psiK^{+}}}_{data}#times#it{#varepsilon}^{#it{J/#psiK^{*0}}}_{MC}/#it{#varepsilon}^{#it{J/#psiK^{+}}}_{MC}",
+     "#it{#varepsilon}^{#it{J/#psiK^{*0}}}_{MC}/#it{#varepsilon}^{#it{J/#psiK^{+}}}_{MC}"
+    //kshort_title
+//"#it{#varepsilon}^{#it{J/#psiK_{S}^{0}}}_{MC}",
+//"#it{#varepsilon}^{#it{J/#psiK^{+}}}_{MC}",
+//"#it{#varepsilon}^{#it{J/#psiK^{+}}}_{data}",
+//"#it{#varepsilon}^{#it{J/#psiK^{+}}}_{data}#times#it{#varepsilon}^{#it{J/#psiK_{S}^{0}}}_{MC}/#it{#varepsilon}^{#it{J/#psiK^{+}}}_{MC}",
+//"#it{#varepsilon}^{#it{J/#psiK_{S}^{0}}}_{MC}/#it{#varepsilon}^{#it{J/#psiK^{+}}}_{MC}"
    };
    if( Vali ){
 	YTitle[0] = "#it{#varepsilon}^{#it{J/#psiK^{+}}}_{MC}";
@@ -812,6 +806,8 @@ int main(int argc, char **argv)
    cout<<"==========================================="<<endl;
 #endif
 }
+
+
 
 
 
