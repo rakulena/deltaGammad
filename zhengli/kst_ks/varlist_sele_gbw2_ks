@@ -1,0 +1,8 @@
+min_mu_ProbNNmu_corr            min_mu_ProbNNmu_corr         0 50  0.   1.       1.
+piplus_ProbNNpi_corr             piplus_ProbNNpi_corr          0 50  0.   1.       1.
+piminus_ProbNNpi_corr            piminus_ProbNNpi_corr         0 50  0.   1.       1.
+log_Bd_ENDVERTEX_CHI2NDOF        log_Bd_ENDVERTEX_CHI2NDOF     0 50 -5.   5.       1.
+log_Bd_IPCHI2_OWNPV              log_Bd_IPCHI2_OWNPV           0 50 -5.   5.       1.
+log_Bd_OnlyPV_CHI2NDOF        log_Bd_OnlyPV_CHI2NDOF     0 50 -5.   5.       1.
+Bd_PT                            Bd_PT[GeV]                         0 50  0.   25000.   0.001
+Kshort_PT                        Kshort_PT[GeV]                     0 50  0.   10000.   0.001. 
